@@ -14,4 +14,4 @@ Grid layout;
 Для того чтобы popup стал видимым, необходимо было добавить свойство visibility с значением visible. Чтобы добавить данное свойство, было необходимо добавить класс popup__opened, для чего был использован метод Element.classList.add().
 
 
-Ссылка на проект https://s01012.github.io/russian-travel/
+Ссылка на проект https://s01012.github.io/mesto/
