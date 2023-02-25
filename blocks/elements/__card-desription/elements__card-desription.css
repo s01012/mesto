@@ -1,0 +1,6 @@
+.elements__card-desription {
+  display: flex;
+  margin: 0 15px 0 21px;
+  padding-bottom: 31px;
+  justify-content: space-between;
+}

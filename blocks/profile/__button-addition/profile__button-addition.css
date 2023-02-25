@@ -1,0 +1,25 @@
+.profile__button-addition {
+  background: transparent url(../../../images/profile_plus.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 150px;
+  height: 50px;
+  border: none;
+  align-self: center;
+  cursor: pointer;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+  transition-delay: 0.1s;
+}
+
+.profile__button-addition:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 360px) {
+  .profile__button-addition {
+    background: url(../../../images/profile_plus_mobile.svg);
+    width: 282px;
+    height: 50px;
+  }
+}

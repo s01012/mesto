@@ -1,0 +1,17 @@
+.elements {
+  margin-bottom: 66px;
+}
+
+@media screen and (max-width: 750px) {
+  .elements {
+    margin: 0 auto 67px;
+    max-width: 581px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .elements {
+    margin-bottom: 48px;
+
+  }
+}

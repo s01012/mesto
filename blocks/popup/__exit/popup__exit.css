@@ -1,0 +1,29 @@
+.popup__exit {
+  background: url(../../../images/popup_close_icon.svg);
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  border: none;
+  cursor: pointer;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+  transition-delay: 0.1s;
+}
+
+.popup__exit:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 600px) {
+  .popup__exit {
+    width: 20px;
+    height: 20px;
+    top: -36px;
+    right: 0px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background: url(../../../images/popup_close_Icon_mobile.svg);
+  }
+}

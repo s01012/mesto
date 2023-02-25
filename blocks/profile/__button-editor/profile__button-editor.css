@@ -1,0 +1,27 @@
+.profile__button-editor {
+  background: url(../../../images/profile_pen.svg);
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  margin-top: 15px;
+  cursor: pointer;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+  transition-delay: 0.1s;
+}
+
+.profile__button-editor:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 360px) {
+  .profile__button-editor {
+    background: url(../../../images/profile_pen_mobile.svg);
+    width: 18px;
+    height: 18px;
+    margin-top: 5px;
+  }
+
+}
