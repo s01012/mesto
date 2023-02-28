@@ -9,3 +9,9 @@
     flex-direction: column;
   }
 }
+
+@media screen and (max-width: 340px) {
+  .profile {
+    margin-bottom: 36px;
+  }
+}

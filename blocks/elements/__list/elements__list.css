@@ -4,32 +4,14 @@
   column-gap: 17px;
   row-gap: 20px;
   list-style-type: none;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
 }
 
 @media screen and (max-width: 940px) {
   .elements__list {
     grid-template-columns: repeat(2, 1fr);
-    width: 78.51351351%;
-    margin: 0 auto;
-  }
-}
-
-@media screen and (max-width: 870px) {
-  .elements__list {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 75.45vw;
-    margin: 0 auto;
-
-  }
-}
-
-@media screen and (max-width: 750px) {
-  .elements__list {
-    grid-template-columns: repeat(2, 1fr);
-    width: 85.44%;
-    margin: 0;
+    max-width: 581px;
 
   }
 }
@@ -38,7 +20,6 @@
   .elements__list {
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
     align-items: center;
     gap: 20px;
   }

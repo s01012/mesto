@@ -10,6 +10,8 @@
   transition-duration: 0.3s;
   transition-timing-function: ease;
   transition-delay: 0.1s;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .popup__exit:hover {
@@ -22,8 +24,6 @@
     height: 20px;
     top: -36px;
     right: 0px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background: url(../../../images/popup_close_Icon_mobile.svg);
+    background-size: contain;
   }
 }

@@ -13,6 +13,7 @@
 @media screen and (max-width: 1080px) {
   .footer {
     width: calc(100% - 200px);
+    flex-shrink: 0;
   }
 }
 

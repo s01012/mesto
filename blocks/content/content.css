@@ -2,6 +2,7 @@
   max-width: 880px;
   width: calc(100% - 400px);
   margin: 0 auto;
+  flex: 1;
 }
 
 @media screen and (max-width: 1180px) {

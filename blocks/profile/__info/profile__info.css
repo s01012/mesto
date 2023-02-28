@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 24px;
   column-gap: 18px;
-  align-self: center;
+
 }
 
 @media screen and (max-width: 675px) {
@@ -14,7 +14,9 @@
 @media screen and (max-width: 360px) {
   .profile__info {
     margin: 0 auto 36px;
-    grid-template-columns: 1fr 18px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 0;
+    justify-content: center;
   }
 }
-
