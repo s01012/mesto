@@ -1,0 +1,12 @@
+.profile__info-editor {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media screen and (max-width: 524px) {
+  .profile__info-editor {
+    align-items: center;
+
+  }
+}

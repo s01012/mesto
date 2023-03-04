@@ -9,12 +9,6 @@
   max-width: 336px;
 }
 
-@media screen and (max-width: 675px) {
-  .profile__subtitle {
-    justify-self: center;
-  }
-}
-
 @media screen and (max-width: 360px) {
   .profile__subtitle {
     font-size: 14px;

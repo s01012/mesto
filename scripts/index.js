@@ -11,14 +11,12 @@ popupExit.addEventListener('click', closePopup);
 let formElement = document.querySelector('.popup__form');
 formElement.addEventListener('submit', handleFormSubmit);
 
+let inputName = document.getElementById('name');
+let inputJob = document.getElementById('job');
 
 function openPopup() {
-  let inputName = document.getElementById('name');
   inputName.value = personName.textContent;
-
-  let inputJob = document.getElementById('job');
   inputJob.value = personDescription.textContent;
-
   popupElement.classList.add('popup_opened');
 }
 
@@ -28,10 +26,8 @@ function closePopup() {
 
 function handleFormSubmit (evt) {
   evt.preventDefault();
-  let userName = document.querySelector('.profile__title');
-  userName.textContent = document.getElementById('name').value;
-  let userJob = document.querySelector('.profile__subtitle');
-  userJob.textContent = document.getElementById('job').value;
+  personName.textContent = inputName.value;
+  personDescription.textContent = inputJob.value;
   closePopup();
 }
 
