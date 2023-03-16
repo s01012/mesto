@@ -49,6 +49,7 @@ for(let i = 0; i<initialCards.length; i++){
   const card = templateContent.querySelector('.elements__card').cloneNode(true);
   card.querySelector('.elements__card-image').setAttribute('src', initialCards[i].link);
   card.querySelector('.elements__card-title').textContent = initialCards[i].name;
+  card.querySelector('.elements__button').addEventListener('click', activateLike);
   cardsList.append(card);
 }
 
@@ -70,4 +71,7 @@ function handleFormSubmit (evt) {
   closePopup();
 }
 
-
+/* коллбэк к лайкам */
+function activateLike(evt) {
+  evt.target.classList.toggle('elements__button_active');
+}
