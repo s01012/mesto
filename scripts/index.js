@@ -1,58 +1,92 @@
-let popupElement = document.querySelector('.popup');
+let popupElement = document.querySelector('#editProfile');
+let popupElementCards = document.querySelector('#addCards');
 let personName = document.querySelector('.profile__title');
 let personDescription = document.querySelector('.profile__subtitle');
 
+/*найти, положить элемент кнопки редактирования профиля в переменную, доабвить к нему слушатели и вызвать функцию*/
 let elementPen = document.querySelector('.profile__button-editor');
 elementPen.addEventListener('click', openPopup);
 
+/*найти, положить элемент кнопки ЗАКРЫТИЯ редактирования профиля в переменную, доабвить к нему слушатели и вызвать функцию*/
 let popupExit = document.querySelector('.popup__exit');
 popupExit.addEventListener('click', closePopup);
 
+/*найти, положить элемент кнопки ЗАКРЫТИЯ редактирования профиля в переменную, доабвить к нему слушатели при отправке формы,
+и вызвать функцию*/
 let formElement = document.querySelector('.popup__form');
 formElement.addEventListener('submit', handleFormSubmit);
 
+/*переменные, которые находят в dom элементы с соответствующими id */
 let inputName = document.getElementById('name');
 let inputJob = document.getElementById('job');
+
+/*найти, положить элемент кнопки добавления фотокарточек в переменную, доабвить к нему слушатели и вызвать функцию*/
+let elementPlus = document.querySelector('.profile__button-addition');
+elementPlus.addEventListener('click', openPopupCards);
+
+let popupExitAddCards = popupElementCards.querySelector('.popup__exit');
+popupExitAddCards.addEventListener('click', closePopupCards);
+
+let formElementAddCards = popupElementCards.querySelector('.popup__form');
+formElementAddCards.addEventListener('submit', addCards);
+
+
+
+let inputTitle = document.getElementById('title');
+let inputLink = document.getElementById('link');
+
 /* вытаскиваем содержимое шаблона и контейнер для карточек*/
 const templateContent = document.querySelector('#card').content;
 const cardsList = document.querySelector('.elements__list');
 /*заполняем список карточками по умолчанию*/
 
 const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+  ];
+
+
+  for(let i = 0; i<initialCards.length; i++){
+    let card = templateContent.querySelector('.elements__card').cloneNode(true);
+    card.querySelector('.elements__card-image').setAttribute('src', initialCards[i].link);
+    card.querySelector('.elements__card-title').textContent = initialCards[i].name;
+    card.querySelector('.elements__button').addEventListener('click', activateLike);
+    cardsList.append(card);
   }
-];
 
-for(let i = 0; i<initialCards.length; i++){
-  const card = templateContent.querySelector('.elements__card').cloneNode(true);
-  card.querySelector('.elements__card-image').setAttribute('src', initialCards[i].link);
-  card.querySelector('.elements__card-title').textContent = initialCards[i].name;
+
+
+
+function addCards() {
+  let card = templateContent.querySelector('.elements__card').cloneNode(true);
+  card.querySelector('.elements__card-image').setAttribute('src', inputLink.value);
+  card.querySelector('.elements__card-title').textContent = inputTitle.value;
   card.querySelector('.elements__button').addEventListener('click', activateLike);
-  cardsList.append(card);
+  cardsList.prepend(card);
+  closePopupCards();
 }
-
 
 function openPopup() {
   inputName.value = personName.textContent;
@@ -60,9 +94,22 @@ function openPopup() {
   popupElement.classList.add('popup_opened');
 }
 
+function openPopupCards() {
+  inputName.value = personName.textContent;
+  inputJob.value = personDescription.textContent;
+  popupElementCards.classList.add('popup_opened');
+}
+
 function closePopup() {
   popupElement.classList.remove('popup_opened');
+
 }
+
+function closePopupCards() {
+  popupElementCards.classList.remove('popup_opened');
+
+}
+
 
 function handleFormSubmit (evt) {
   evt.preventDefault();

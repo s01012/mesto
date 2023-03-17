@@ -34,7 +34,7 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-    <div class="popup">
+    <div class="popup" id="editProfile">
       <div class="popup__container">
         <button aria-label="Закрыть" type="button" class="popup__exit"></button>
         <h3 class="popup__title">Редактировать профиль</h3>
@@ -42,6 +42,19 @@
           <fieldset class="form__set">
             <input type="text" class="form__input" id="name" name="user_name">
             <input type="text" class="form__input" id="job" name="user_profession">
+          </fieldset>
+          <button aria-label="Сохранить" type="submit" class="form__sumbit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup" id="addCards">
+      <div class="popup__container">
+        <button aria-label="Закрыть" type="button" class="popup__exit" id="CloseAddCards"></button>
+        <h3 class="popup__title">Новое место</h3>
+        <form name="edit-form" action="#" class="form popup__form" >
+          <fieldset class="form__set">
+            <input type="text" class="form__input" id="title" name="title">
+            <input type="text" class="form__input" id="link" name="link">
           </fieldset>
           <button aria-label="Сохранить" type="submit" class="form__sumbit">Сохранить</button>
         </form>
