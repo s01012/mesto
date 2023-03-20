@@ -53,16 +53,26 @@
         <h3 class="popup__title">Новое место</h3>
         <form name="edit-form" action="#" class="form popup__form" >
           <fieldset class="form__set">
-            <input type="text" class="form__input" id="title" name="title">
-            <input type="text" class="form__input" id="link" name="link">
+            <input type="text" class="form__input" id="title" name="title" placeholder="Название">
+            <input type="text" class="form__input" id="link" name="link" placeholder="Ссылка на картинку">
           </fieldset>
-          <button aria-label="Сохранить" type="submit" class="form__sumbit">Сохранить</button>
+          <button aria-label="Сохранить" type="submit" class="form__sumbit">Создать</button>
         </form>
+      </div>
+    </div>
+    <div class="popup" id="imageOpen">
+      <div class="popup__container-image">
+        <button aria-label="Закрыть" type="button" class="popup__exit"></button>
+        <figure class="popup__figure">
+          <img class="popup__image">
+          <figcaption class="popup__caption"></figcaption>
+        </figure>
       </div>
     </div>
   </div>
   <template id="card">
     <li class="elements__card">
+      <button arial-label="Удалить" class="elements__delete" type="button"></button>
       <img class="elements__card-image">
       <div class="elements__card-desription">
         <h2 class="elements__card-title"></h2>

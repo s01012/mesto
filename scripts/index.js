@@ -1,7 +1,9 @@
 let popupElement = document.querySelector('#editProfile');
 let popupElementCards = document.querySelector('#addCards');
+let popupImage = document.querySelector('#imageOpen');
 let personName = document.querySelector('.profile__title');
 let personDescription = document.querySelector('.profile__subtitle');
+
 
 /*найти, положить элемент кнопки редактирования профиля в переменную, доабвить к нему слушатели и вызвать функцию*/
 let elementPen = document.querySelector('.profile__button-editor');
@@ -30,6 +32,11 @@ popupExitAddCards.addEventListener('click', closePopupCards);
 let formElementAddCards = popupElementCards.querySelector('.popup__form');
 formElementAddCards.addEventListener('submit', addCards);
 
+
+let popupImgLink = document.querySelector('.popup__image');
+
+let popupImageExit = popupImage.querySelector('.popup__exit');
+popupImageExit.addEventListener('click', closePopupImage);
 
 
 let inputTitle = document.getElementById('title');
@@ -71,8 +78,11 @@ const initialCards = [
   for(let i = 0; i<initialCards.length; i++){
     let card = templateContent.querySelector('.elements__card').cloneNode(true);
     card.querySelector('.elements__card-image').setAttribute('src', initialCards[i].link);
+    card.querySelector('.elements__card-image').setAttribute('alt', initialCards[i].name);
     card.querySelector('.elements__card-title').textContent = initialCards[i].name;
     card.querySelector('.elements__button').addEventListener('click', activateLike);
+    card.querySelector('.elements__delete').addEventListener('click', deleteCards);
+    card.querySelector('.elements__card-image').addEventListener('click', openImage);
     cardsList.append(card);
   }
 
@@ -82,10 +92,16 @@ const initialCards = [
 function addCards() {
   let card = templateContent.querySelector('.elements__card').cloneNode(true);
   card.querySelector('.elements__card-image').setAttribute('src', inputLink.value);
+  card.querySelector('.elements__card-image').setAttribute('alt', inputTitle.value);
   card.querySelector('.elements__card-title').textContent = inputTitle.value;
   card.querySelector('.elements__button').addEventListener('click', activateLike);
+  card.querySelector('.elements__delete').addEventListener('click', deleteCards);
+  card.querySelector('.elements__card-image').addEventListener('click', openImage);
   cardsList.prepend(card);
+  inputLink.value = '';
+  inputTitle.value = '';
   closePopupCards();
+  closePopupImage();
 }
 
 function openPopup() {
@@ -110,6 +126,10 @@ function closePopupCards() {
 
 }
 
+function closePopupImage() {
+  popupImage.classList.remove('popup_opened');
+
+}
 
 function handleFormSubmit (evt) {
   evt.preventDefault();
@@ -122,3 +142,21 @@ function handleFormSubmit (evt) {
 function activateLike(evt) {
   evt.target.classList.toggle('elements__button_active');
 }
+
+function deleteCards(evt) {
+  evt.target.closest('.elements__card').remove();
+
+}
+
+
+function openImage (evt) {
+  let cardImage = evt.target.getAttribute('src');
+  let cardTitle = evt.target.closest('.elements__card').querySelector('.elements__card-title').textContent;
+  popupImgLink.setAttribute('src', cardImage);
+  popupImgLink.setAttribute('alt', cardTitle);
+  let popupCaption = popupImage.querySelector('.popup__caption');
+  popupCaption.textContent = cardTitle;
+  popupImage.classList.add('popup_opened');
+  popupImage.classList.add('popup_dark');
+}
+
