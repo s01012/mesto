@@ -108,27 +108,26 @@ function addCards(evt) {
 function openPopup() {
   inputName.value = personName.textContent;
   inputJob.value = personDescription.textContent;
-  popupElement.classList.add('popup_opened');
+  addPopupOpened(popupElement);
 }
 
 function openPopupCards() {
   inputName.value = personName.textContent;
   inputJob.value = personDescription.textContent;
-  popupElementCards.classList.add('popup_opened');
+  addPopupOpened(popupElementCards);
 }
 
 function closePopup() {
-  popupElement.classList.remove('popup_opened');
+  removePopupOpened(popupElement);
 
 }
 
 function closePopupCards() {
-  popupElementCards.classList.remove('popup_opened');
-
+  removePopupOpened(popupElementCards);
 }
 
 function closePopupImage() {
-  popupImage.classList.remove('popup_opened');
+  removePopupOpened(popupImage);
 
 }
 
@@ -157,13 +156,14 @@ function openImage (evt) {
   popupImgLink.setAttribute('alt', cardTitle);
   const popupCaption = popupImage.querySelector('.popup__caption');
   popupCaption.textContent = cardTitle;
-  popupImage.classList.add('popup_opened');
+  addPopupOpened(popupImage);
   popupImage.classList.add('popup_dark');
 }
 
-function summ (x, y) {
-  const s = x+y;
-  return s;
+function removePopupOpened(popup) {
+  popup.classList.remove('popup_opened');
 }
 
-const a = summ(3,5);
+function addPopupOpened(popup) {
+  popup.classList.add('popup_opened');
+}
