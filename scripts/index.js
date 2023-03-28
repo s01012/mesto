@@ -22,8 +22,8 @@ const formElement = document.querySelector('.popup__form');
 formElement.addEventListener('submit', handleFormSubmit);
 
 /*переменные, которые находят в dom элементы с соответствующими id */
-const inputName = document.getElementById('name');
-const inputJob = document.getElementById('job');
+const inputName = document.querySelector('#name');
+const inputJob = document.querySelector('#job');
 
 /*найти, положить элемент кнопки добавления фотокарточек в переменную, доабвить к нему слушатели и вызвать функцию*/
 const elementPlus = document.querySelector('.profile__button-addition');
@@ -42,8 +42,8 @@ const popupImageExit = popupImage.querySelector('.popup__exit');
 popupImageExit.addEventListener('click', closePopupImage);
 
 
-const inputTitle = document.getElementById('title');
-const inputLink = document.getElementById('link');
+const inputTitle = document.querySelector('#title');
+const inputLink = document.querySelector('#link');
 
 /* вытаскиваем содержимое шаблона и контейнер для карточек*/
 const templateContent = document.querySelector('#card').content;
