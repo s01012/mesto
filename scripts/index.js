@@ -95,11 +95,12 @@ function createCard(link, name) {
 }
 
 
-function addCards() {
+function addCards(evt) {
   const card = createCard(inputLink.value, inputTitle.value);
   cardsList.prepend(card);
-  inputLink.value = '';
-  inputTitle.value = '';
+  /*inputLink.value = '';
+  inputTitle.value = '';*/
+  evt.target.reset();
   closePopupCards();
   closePopupImage();
 }
