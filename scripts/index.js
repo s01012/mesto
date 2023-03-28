@@ -3,6 +3,7 @@ const popupElementCards = document.querySelector('#addCards');
 const popupImage = document.querySelector('#imageOpen');
 const personName = document.querySelector('.profile__title');
 const personDescription = document.querySelector('.profile__subtitle');
+const popupCaption = popupImage.querySelector('.popup__caption');
 
 
 
@@ -152,7 +153,6 @@ function openImage (evt) {
   const cardTitle = evt.target.closest('.elements__card').querySelector('.elements__card-title').textContent;
   popupImgLink.setAttribute('src', cardImage);
   popupImgLink.setAttribute('alt', cardTitle);
-  const popupCaption = popupImage.querySelector('.popup__caption');
   popupCaption.textContent = cardTitle;
   addPopupOpened(popupImage);
   popupImage.classList.add('popup_dark');
