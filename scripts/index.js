@@ -112,8 +112,6 @@ function openPopup() {
 }
 
 function openPopupCards() {
-  inputName.value = personName.textContent;
-  inputJob.value = personDescription.textContent;
   addPopupOpened(popupElementCards);
 }
 
