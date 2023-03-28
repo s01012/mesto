@@ -4,6 +4,10 @@ let popupImage = document.querySelector('#imageOpen');
 let personName = document.querySelector('.profile__title');
 let personDescription = document.querySelector('.profile__subtitle');
 
+let hello = document.querySelectorAll('.section_hello');
+console.log(hello);
+
+
 
 /*найти, положить элемент кнопки редактирования профиля в переменную, доабвить к нему слушатели и вызвать функцию*/
 let elementPen = document.querySelector('.profile__button-editor');
