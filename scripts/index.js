@@ -79,27 +79,24 @@ const initialCards = [
 
 
   for(let i = 0; i<initialCards.length; i++){
-    const card = templateContent.querySelector('.elements__card').cloneNode(true);
-    card.querySelector('.elements__card-image').setAttribute('src', initialCards[i].link);
-    card.querySelector('.elements__card-image').setAttribute('alt', initialCards[i].name);
-    card.querySelector('.elements__card-title').textContent = initialCards[i].name;
-    card.querySelector('.elements__button').addEventListener('click', activateLike);
-    card.querySelector('.elements__delete').addEventListener('click', deleteCards);
-    card.querySelector('.elements__card-image').addEventListener('click', openImage);
+    const card = createCard(initialCards[i].link, initialCards[i].name);
     cardsList.append(card);
   }
 
-
+function createCard(link, name) {
+  const cardElement = templateContent.querySelector('.elements__card').cloneNode(true);
+  cardElement.querySelector('.elements__card-image').setAttribute('src', link);
+  cardElement.querySelector('.elements__card-image').setAttribute('alt', name);
+  cardElement.querySelector('.elements__card-title').textContent = name;
+  cardElement.querySelector('.elements__button').addEventListener('click', activateLike);
+  cardElement.querySelector('.elements__delete').addEventListener('click', deleteCards);
+  cardElement.querySelector('.elements__card-image').addEventListener('click', openImage);
+  return cardElement;
+}
 
 
 function addCards() {
-  const card = templateContent.querySelector('.elements__card').cloneNode(true);
-  card.querySelector('.elements__card-image').setAttribute('src', inputLink.value);
-  card.querySelector('.elements__card-image').setAttribute('alt', inputTitle.value);
-  card.querySelector('.elements__card-title').textContent = inputTitle.value;
-  card.querySelector('.elements__button').addEventListener('click', activateLike);
-  card.querySelector('.elements__delete').addEventListener('click', deleteCards);
-  card.querySelector('.elements__card-image').addEventListener('click', openImage);
+  const card = createCard(inputLink.value, inputTitle.value);
   cardsList.prepend(card);
   inputLink.value = '';
   inputTitle.value = '';
@@ -163,3 +160,9 @@ function openImage (evt) {
   popupImage.classList.add('popup_dark');
 }
 
+function summ (x, y) {
+  const s = x+y;
+  return s;
+}
+
+const a = summ(3,5);
