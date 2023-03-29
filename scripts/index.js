@@ -110,19 +110,22 @@ function openPopup() {
   inputName.value = personName.textContent;
   inputJob.value = personDescription.textContent;
   addPopupOpened(popupElement);
+  console.log('открытие профиля');/*открытие профиля пользователя*/
 }
 
 function openPopupCards() {
   addPopupOpened(popupElementCards);
+  console.log('открытие добавление карточек'); /*открытие добавление карточек*/
 }
 
 function closePopup() {
   removePopupOpened(popupElement);
-
+  console.log('закрыть профиль');/*закрыть профиль пользователя*/
 }
 
 function closePopupCards() {
   removePopupOpened(popupElementCards);
+  console.log('закрыть попап добавления карточек');/*закрыть попап добавления карточек*/
 }
 
 function closePopupImage() {
@@ -135,6 +138,7 @@ function handleFormSubmit (evt) {
   personName.textContent = inputName.value;
   personDescription.textContent = inputJob.value;
   closePopup();
+  console.log('кнопка сохранить в попап редактирования профиля пользователя');/*кнопка сохранить в попап редактирования профиля пользователя*/
 }
 
 /* коллбэк к лайкам */
@@ -155,13 +159,20 @@ function openImage (evt) {
   popupImgLink.setAttribute('alt', cardTitle);
   popupCaption.textContent = cardTitle;
   addPopupOpened(popupImage);
-  popupImage.classList.add('popup_dark');
+
+  console.log('открытие окна просмотра фото');
 }
 
 function removePopupOpened(popup) {
   popup.classList.remove('popup_opened');
+  console.log('еще раз закрыть');
 }
 
 function addPopupOpened(popup) {
   popup.classList.add('popup_opened');
+  popupImage.classList.add('popup_dark');
+}
+
+function sum(x) {
+  console.log(x);
 }
