@@ -39,4 +39,6 @@
 @import url(../blocks/form/__set/form__set.css);
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__sumbit/form__sumbit.css);
-
+@import url(../blocks/form/__input/form__input_error.css);
+@import url(../blocks/form/__input/form__input-error_hidden.css);
+@import url(../blocks/form/__input/form__input-error_active.css);
