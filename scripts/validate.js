@@ -1,34 +1,70 @@
 const formElement2 = document.querySelector('.form');
-const formInput = formElement2.querySelector('.form__input');
-const formError = formElement2.querySelector(`.${formInput.id}-error`);
 
-
-formInput.addEventListener('input', function (evt) {
-    console.log(formInput.validity);
-    if (!formInput.validity.valid) {
-      // Передадим сообщение об ошибке вторым аргументом
-      showInputError(formInput, formInput.validationMessage);
-    } else {
-      hideInputError(formInput);
-    }
-  }
-);
 
 
 // Передадим текст ошибки вторым параметром
-const showInputError = (element, errorMessage) => {
-  element.classList.add('form__input_error');
+const showInputError = (someInput, errorMessage) => {
+  someInput.classList.add('form__input_error');
+  const someError = document.querySelector(`.${someInput.id}-error`);
   // Заменим содержимое span с ошибкой на переданный параметр
-  formError.textContent = errorMessage;
-  formError.classList.add('form__input-error_active');
+  someError.textContent = errorMessage;
+  someError.classList.add('form__input-error_active');
 };
 
-const hideInputError = (element) => {
-  element.classList.remove('form__input_error');
-  formError.classList.remove('form__input-error_active');
+const hideInputError = (someInput) => {
+  someInput.classList.remove('form__input_error');
+  const someError = document.querySelector(`.${someInput.id}-error`);
+  someError.classList.remove('form__input-error_active');
   // Очистим ошибку
-  formError.textContent = '';
+  someError.textContent = '';
 };
 
+const isValid = (someInput) => { /*вызываем фнукцию, которая получает в качестве параметра поле ввода */
 
+  if (!someInput.validity.valid) { /*проверка, если у объекта validity значение false то вызовем функцию  showInputError*/
+                                                                    // Передадим сообщение об ошибке вторым аргументом
+    showInputError(someInput, someInput.validationMessage);
+  } else {                                                          // иначе hideInputError
+    hideInputError(someInput);
+  }
+}
+
+const addEventListeners = (someForm) => { /*вызываем фнукцию, которая получает в качестве параметра форму */
+  const allInputs = Array.from(someForm.querySelectorAll('.form__input')); /*создали переменную, которая получает массив из всех полей ввода */
+  const submit = someForm.querySelector('.form__sumbit');
+  toggleSubmitButton(allInputs, submit);
+  allInputs.forEach(element => { /*обходим все поля ввода */
+    element.addEventListener('input', () => {  /*на каждое поле ставим слушатель по вводлу клавиатуры */
+      isValid(element); /*вызвали функцию, передали поле ввода */
+
+      toggleSubmitButton(allInputs, submit);
+    })
+  });
+}
+
+const getAllForms = () => { /* создали функцию  */
+  const allForms = Array.from(document.querySelectorAll('.form')); /* создали переменную. внутри переменной разместили массив состоящий из фвсех форм на сайте  */
+  allForms.forEach(form => { /* обходим все формы  */
+    addEventListeners(form); /*вызываем фнукцию, которой передаем каждый элемент массива состоящий из форм  */
+  });
+}
+
+const hasInvalidInput = (allInputs) => {
+  return allInputs.some((inputElement) => {
+    return !inputElement.validity.valid;
+  })
+};
+
+const toggleSubmitButton = (allInputs, submitButton) => {
+  if (hasInvalidInput(allInputs)) {
+    submitButton.classList.add('form__sumbit_inactive');
+    submitButton.setAttribute('disabled', true);
+  }
+  else {
+    submitButton.classList.remove('form__sumbit_inactive');
+    submitButton.removeAttribute('disabled');
+  }
+}
+
+getAllForms();
 

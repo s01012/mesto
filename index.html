@@ -40,10 +40,10 @@
         <h3 class="popup__title">Редактировать профиль</h3>
         <form name="edit-form" action="#" class="form popup__form" novalidate>
           <fieldset class="form__set">
-            <input type="text" class="form__input" id="name" name="user_name" minlength="2" maxlength="40" required>
+            <input type="text" class="form__input" id="name" name="user_name" placeholder="Имя" minlength="2" maxlength="40" required>
             <span class="form__input-error_hidden name-error"></span>
-            <input type="text" class="form__input" id="job" name="user_profession" minlength="2" maxlength="200" required>
-            <span class="form__input-error_hidden"></span>
+            <input type="text" class="form__input" id="job" name="user_profession" placeholder="О себе" minlength="2" maxlength="200" required>
+            <span class="form__input-error_hidden job-error"></span>
           </fieldset>
           <button aria-label="Сохранить" type="submit" class="form__sumbit">Сохранить</button>
         </form>
@@ -55,10 +55,10 @@
         <h3 class="popup__title">Новое место</h3>
         <form name="edit-form" action="#" class="form popup__form" novalidate>
           <fieldset class="form__set">
-            <input type="text" class="form__input form__input-error" id="title" name="title" placeholder="Название">
-            <span class="title-error title-stNone title-active"></span>
-            <input type="url" class="form__input link-active form__input-error" id="link" name="link" placeholder="Ссылка на картинку">
-            <span class="link-error linkk-stNone"></span>
+            <input type="text" class="form__input form__input-error" id="title" name="title" placeholder="Название" minlength="2" maxlength="30" required>
+            <span class="form__input-error_hidden title-error"></span>
+            <input type="url" class="form__input form__input-error" id="link" name="link" placeholder="Ссылка на картинку" required>
+            <span class="form__input-error_hidden link-error"></span>
           </fieldset>
           <button aria-label="Сохранить" type="submit" class="form__sumbit">Создать</button>
         </form>

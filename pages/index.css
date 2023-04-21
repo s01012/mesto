@@ -42,3 +42,5 @@
 @import url(../blocks/form/__input/form__input_error.css);
 @import url(../blocks/form/__input/form__input-error_hidden.css);
 @import url(../blocks/form/__input/form__input-error_active.css);
+@import url(../blocks/form/__sumbit/_inactive/form__sumbit_inactive.css);
+
