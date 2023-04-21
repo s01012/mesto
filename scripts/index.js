@@ -156,27 +156,31 @@ function openImage (evt) {
 
 function removePopupOpened(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', escapePressed);
 }
 
 function addPopupOpened(popup) {
   popup.classList.add('popup_opened');
   popupImage.classList.add('popup_dark');
+  document.addEventListener('keydown', escapePressed);
 }
 
-document.addEventListener('keydown', function(evt) {
+function escapePressed(evt) {
   if(evt.key === 'Escape') {
-    closePopupImage();
-    closePopupCards();
-    closePopup();
+      closePopupImage();
+       closePopupCards();
+       closePopup();
+       console.log('!!!!');
   }
-});
-/*document.addEventListener('click', function(evt) {
-  if(popup.classList.contains('popup_opened')){
-    if(evt.target === popup) {
-      closePopup();
-    }
-  }
-})*/
+}
+// document.addEventListener('keydown', function(evt) {
+//   if(evt.key === 'Escape') {
+//     closePopupImage();
+//     closePopupCards();
+//     closePopup();
+//   }
+// });
+
 document.addEventListener('click', function(evt) {
     if(evt.target === popupElement ||
        evt.target === popupElementCards ||

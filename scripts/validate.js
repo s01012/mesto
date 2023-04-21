@@ -1,51 +1,51 @@
-const formElement2 = document.querySelector('.form');
-
-
 
 // Передадим текст ошибки вторым параметром
-const showInputError = (someInput, errorMessage) => {
-  someInput.classList.add('form__input_error');
+const showInputError = (someInput, errorMessage, config) => {
+  someInput.classList.add(config.inputErrorClass);
   const someError = document.querySelector(`.${someInput.id}-error`);
   // Заменим содержимое span с ошибкой на переданный параметр
   someError.textContent = errorMessage;
-  someError.classList.add('form__input-error_active');
+  someError.classList.add(config.errorClass);
 };
 
-const hideInputError = (someInput) => {
-  someInput.classList.remove('form__input_error');
+const hideInputError = (someInput, config) => {
+  someInput.classList.remove(config.inputErrorClass);
   const someError = document.querySelector(`.${someInput.id}-error`);
-  someError.classList.remove('form__input-error_active');
+  someError.classList.remove(config.errorClass);
   // Очистим ошибку
   someError.textContent = '';
 };
 
-const isValid = (someInput) => { /*вызываем фнукцию, которая получает в качестве параметра поле ввода */
+const isValid = (someInput, config) => { /*вызываем фнукцию, которая получает в качестве параметра поле ввода */
 
   if (!someInput.validity.valid) { /*проверка, если у объекта validity значение false то вызовем функцию  showInputError*/
                                                                     // Передадим сообщение об ошибке вторым аргументом
-    showInputError(someInput, someInput.validationMessage);
+    showInputError(someInput, someInput.validationMessage, config);
   } else {                                                          // иначе hideInputError
-    hideInputError(someInput);
+    hideInputError(someInput, config);
   }
 }
 
-const addEventListeners = (someForm) => { /*вызываем фнукцию, которая получает в качестве параметра форму */
-  const allInputs = Array.from(someForm.querySelectorAll('.form__input')); /*создали переменную, которая получает массив из всех полей ввода */
-  const submit = someForm.querySelector('.form__sumbit');
-  toggleSubmitButton(allInputs, submit);
+const addEventListeners = (someForm, config) => { /*вызываем фнукцию, которая получает в качестве параметра форму */
+  const allInputs = Array.from(someForm.querySelectorAll(config.inputSelector)); /*создали переменную, которая получает массив из всех полей ввода */
+  console.log(allInputs);
+  const submit = someForm.querySelector(config.submitButtonSelector);
+  toggleSubmitButton(allInputs, submit, config);
   allInputs.forEach(element => { /*обходим все поля ввода */
     element.addEventListener('input', () => {  /*на каждое поле ставим слушатель по вводлу клавиатуры */
-      isValid(element); /*вызвали функцию, передали поле ввода */
+      isValid(element, config); /*вызвали функцию, передали поле ввода */
 
-      toggleSubmitButton(allInputs, submit);
+      toggleSubmitButton(allInputs, submit, config);
+
     })
   });
 }
 
-const getAllForms = () => { /* создали функцию  */
-  const allForms = Array.from(document.querySelectorAll('.form')); /* создали переменную. внутри переменной разместили массив состоящий из фвсех форм на сайте  */
-  allForms.forEach(form => { /* обходим все формы  */
-    addEventListeners(form); /*вызываем фнукцию, которой передаем каждый элемент массива состоящий из форм  */
+const enableValidation = (config) => { /* создали функцию  */
+
+  const allForms = Array.from(document.querySelectorAll(config.formSelector)); /* создали переменную. внутри переменной разместили массив состоящий из фвсех форм на сайте  */
+    allForms.forEach(form => { /* обходим все формы  */
+    addEventListeners(form, config); /*вызываем фнукцию, которой передаем каждый элемент массива состоящий из форм  */
   });
 }
 
@@ -55,16 +55,23 @@ const hasInvalidInput = (allInputs) => {
   })
 };
 
-const toggleSubmitButton = (allInputs, submitButton) => {
+const toggleSubmitButton = (allInputs, submitButton, config) => {
   if (hasInvalidInput(allInputs)) {
-    submitButton.classList.add('form__sumbit_inactive');
+    submitButton.classList.add(config.inactiveButtonClass);
     submitButton.setAttribute('disabled', true);
   }
   else {
-    submitButton.classList.remove('form__sumbit_inactive');
+    submitButton.classList.remove(config.inactiveButtonClass);
     submitButton.removeAttribute('disabled');
   }
 }
 
-getAllForms();
 
+enableValidation({
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__sumbit',
+  inactiveButtonClass: 'form__sumbit_inactive',
+  inputErrorClass: 'form__input_error',
+  errorClass: 'form__input-error_active'
+});
