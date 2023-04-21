@@ -169,4 +169,22 @@ document.addEventListener('keydown', function(evt) {
     closePopupCards();
     closePopup();
   }
-})
+});
+/*document.addEventListener('click', function(evt) {
+  if(popup.classList.contains('popup_opened')){
+    if(evt.target === popup) {
+      closePopup();
+    }
+  }
+})*/
+document.addEventListener('click', function(evt) {
+    if(evt.target === popupElement ||
+       evt.target === popupElementCards ||
+       evt.target === popupImage) {
+
+      closePopup();
+      closePopupCards();
+      closePopupImage();
+    }
+
+});
