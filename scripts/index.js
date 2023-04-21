@@ -163,3 +163,10 @@ function addPopupOpened(popup) {
   popupImage.classList.add('popup_dark');
 }
 
+document.addEventListener('keydown', function(evt) {
+  if(evt.key === 'Escape') {
+    closePopupImage();
+    closePopupCards();
+    closePopup();
+  }
+})
