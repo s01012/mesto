@@ -28,7 +28,7 @@ const isValid = (someInput, config) => { /*вызываем фнукцию, ко
 
 const addEventListeners = (someForm, config) => { /*вызываем фнукцию, которая получает в качестве параметра форму */
   const allInputs = Array.from(someForm.querySelectorAll(config.inputSelector)); /*создали переменную, которая получает массив из всех полей ввода */
-  console.log(allInputs);
+
   const submit = someForm.querySelector(config.submitButtonSelector);
   toggleSubmitButton(allInputs, submit, config);
   allInputs.forEach(element => { /*обходим все поля ввода */

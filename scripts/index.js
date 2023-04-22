@@ -170,7 +170,7 @@ function escapePressed(evt) {
       closePopupImage();
        closePopupCards();
        closePopup();
-       console.log('!!!!');
+
   }
 }
 // document.addEventListener('keydown', function(evt) {
