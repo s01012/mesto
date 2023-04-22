@@ -72,6 +72,6 @@ enableValidation({
   inputSelector: '.form__input',
   submitButtonSelector: '.form__sumbit',
   inactiveButtonClass: 'form__sumbit_inactive',
-  inputErrorClass: 'form__input_error',
-  errorClass: 'form__input-error_active'
+  inputErrorClass: 'form__input_error_border',
+  errorClass: 'form__input_error_active'
 });
