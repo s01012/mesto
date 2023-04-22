@@ -40,7 +40,7 @@
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__sumbit/form__sumbit.css);
 @import url(../blocks/form/__input/_error/form__input_error_border.css);
-@import url(../blocks/form/__input/_error/form__input_error_hidden.css);
+@import url(../blocks/form/__span/form__span.css);
 @import url(../blocks/form/__input/_error/form__input_error_active.css);
 @import url(../blocks/form/__sumbit/_inactive/form__sumbit_inactive.css);
 
