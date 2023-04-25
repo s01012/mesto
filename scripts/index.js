@@ -5,22 +5,18 @@ const personName = document.querySelector('.profile__title');
 const personDescription = document.querySelector('.profile__subtitle');
 const popupCaption = popupImage.querySelector('.popup__caption');
 
-
-
-
-
 /*найти, положить элемент кнопки редактирования профиля в переменную, доабвить к нему слушатели и вызвать функцию*/
 const elementPen = document.querySelector('.profile__button-editor');
-elementPen.addEventListener('click', openPopup);
+elementPen.addEventListener('click', openEditProfileForm);
 
 /*найти, положить элемент кнопки ЗАКРЫТИЯ редактирования профиля в переменную, доабвить к нему слушатели и вызвать функцию*/
 const popupExit = document.querySelector('.popup__exit');
-popupExit.addEventListener('click', closePopup);
+popupExit.addEventListener('click', closeEditProfileForm);
 
 /*найти, положить элемент кнопки ЗАКРЫТИЯ редактирования профиля в переменную, доабвить к нему слушатели при отправке формы,
 и вызвать функцию*/
 const formElement = document.querySelector('.popup__form');
-formElement.addEventListener('submit', handleFormSubmit);
+formElement.addEventListener('submit', submitEditProfileForm);
 
 /*переменные, которые находят в dom элементы с соответствующими id */
 const inputName = document.querySelector('#name');
@@ -36,12 +32,10 @@ popupExitAddCards.addEventListener('click', closePopupCards);
 const formElementAddCards = popupElementCards.querySelector('.popup__form');
 formElementAddCards.addEventListener('submit', addCards);
 
-
 const popupImgLink = document.querySelector('.popup__image');
 
 const popupImageExit = popupImage.querySelector('.popup__exit');
 popupImageExit.addEventListener('click', closePopupImage);
-
 
 const inputTitle = document.querySelector('#title');
 const inputLink = document.querySelector('#link');
@@ -49,6 +43,7 @@ const inputLink = document.querySelector('#link');
 /* вытаскиваем содержимое шаблона и контейнер для карточек*/
 const templateContent = document.querySelector('#card').content;
 const cardsList = document.querySelector('.elements__list');
+const cardTemplate = templateContent.querySelector('.elements__card');
 /*заполняем список карточками по умолчанию*/
 
 const initialCards = [
@@ -78,33 +73,31 @@ const initialCards = [
     }
   ];
 
-
   for(let i = 0; i<initialCards.length; i++){
     const card = createCard(initialCards[i].link, initialCards[i].name);
     cardsList.append(card);
   }
 
 function createCard(link, name) {
-  const cardElement = templateContent.querySelector('.elements__card').cloneNode(true);
-  cardElement.querySelector('.elements__card-image').setAttribute('src', link);
-  cardElement.querySelector('.elements__card-image').setAttribute('alt', name);
+  const cardElement = cardTemplate.cloneNode(true);
+  const cardElementImage = cardElement.querySelector('.elements__card-image');
+  cardElementImage.setAttribute('src', link);
+  cardElementImage.setAttribute('alt', name);
   cardElement.querySelector('.elements__card-title').textContent = name;
   cardElement.querySelector('.elements__button').addEventListener('click', activateLike);
   cardElement.querySelector('.elements__delete').addEventListener('click', deleteCards);
-  cardElement.querySelector('.elements__card-image').addEventListener('click', openImage);
+  cardElementImage.addEventListener('click', openImage);
   return cardElement;
 }
-
 
 function addCards(evt) {
   const card = createCard(inputLink.value, inputTitle.value);
   cardsList.prepend(card);
   evt.target.reset();
   closePopupCards();
-  closePopupImage();
 }
 
-function openPopup() {
+function openEditProfileForm() {
   inputName.value = personName.textContent;
   inputJob.value = personDescription.textContent;
   addPopupOpened(popupElement);
@@ -114,7 +107,7 @@ function openPopupCards() {
   addPopupOpened(popupElementCards);
 }
 
-function closePopup() {
+function closeEditProfileForm() {
   removePopupOpened(popupElement);
 }
 
@@ -124,14 +117,13 @@ function closePopupCards() {
 
 function closePopupImage() {
   removePopupOpened(popupImage);
-
 }
 
-function handleFormSubmit (evt) {
+function submitEditProfileForm (evt) {
   evt.preventDefault();
   personName.textContent = inputName.value;
   personDescription.textContent = inputJob.value;
-  closePopup();
+  closeEditProfileForm();
 }
 
 /* коллбэк к лайкам */
@@ -144,7 +136,6 @@ function deleteCards(evt) {
 
 }
 
-
 function openImage (evt) {
   const cardImage = evt.target.getAttribute('src');
   const cardTitle = evt.target.closest('.elements__card').querySelector('.elements__card-title').textContent;
@@ -152,43 +143,37 @@ function openImage (evt) {
   popupImgLink.setAttribute('alt', cardTitle);
   popupCaption.textContent = cardTitle;
   addPopupOpened(popupImage);
+  popupImage.classList.add('popup_dark');
 }
 
 function removePopupOpened(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', escapePressed);
+  document.removeEventListener('click', overlayClick);
 }
 
 function addPopupOpened(popup) {
   popup.classList.add('popup_opened');
-  popupImage.classList.add('popup_dark');
   document.addEventListener('keydown', escapePressed);
+  document.addEventListener('click', overlayClick);
+}
+
+function closeOpenedPopup () {
+  const popupOpened = document.querySelector('.popup_opened');
+  removePopupOpened(popupOpened);
 }
 
 function escapePressed(evt) {
   if(evt.key === 'Escape') {
-      closePopupImage();
-       closePopupCards();
-       closePopup();
-
+    closeOpenedPopup();
   }
 }
-// document.addEventListener('keydown', function(evt) {
-//   if(evt.key === 'Escape') {
-//     closePopupImage();
-//     closePopupCards();
-//     closePopup();
-//   }
-// });
 
-document.addEventListener('click', function(evt) {
-    if(evt.target === popupElement ||
-       evt.target === popupElementCards ||
-       evt.target === popupImage) {
+function overlayClick (evt) {
+  if(evt.target === popupElement ||
+    evt.target === popupElementCards ||
+    evt.target === popupImage) {
 
-      closePopup();
-      closePopupCards();
-      closePopupImage();
-    }
-
-});
+   closeOpenedPopup();
+ }
+}

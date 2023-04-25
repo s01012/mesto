@@ -1,4 +1,3 @@
-
 // Передадим текст ошибки вторым параметром
 const showInputError = (someInput, errorMessage, config) => {
   someInput.classList.add(config.inputErrorClass);
@@ -39,6 +38,9 @@ const addEventListeners = (someForm, config) => { /*вызываем фнукц�
 
     })
   });
+  someForm.addEventListener('submit', () => {
+    toggleSubmitButton(allInputs, submit, config);
+  })
 }
 
 const enableValidation = (config) => { /* создали функцию  */
@@ -66,12 +68,14 @@ const toggleSubmitButton = (allInputs, submitButton, config) => {
   }
 }
 
-
-enableValidation({
+const validationConfig = {
   formSelector: '.form',
   inputSelector: '.form__input',
   submitButtonSelector: '.form__sumbit',
   inactiveButtonClass: 'form__sumbit_inactive',
   inputErrorClass: 'form__input_error_border',
   errorClass: 'form__input_error_active'
-});
+}
+
+enableValidation(validationConfig);
+
