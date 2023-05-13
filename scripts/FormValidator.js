@@ -1,4 +1,4 @@
-class FormValidator {
+export class FormValidator {
   constructor(validationConfig, formElement) {
     this._formSelector         = validationConfig.formSelector;
     this._inputSelector        = validationConfig.inputSelector;
@@ -6,7 +6,7 @@ class FormValidator {
     this._inactiveButtonClass  = validationConfig.inactiveButtonClass;
     this._inputErrorClass      = validationConfig.inputErrorClass;
     this._errorClass           = validationConfig.errorClass;
-    this._form = formElement;
+    this._formElement = formElement;
   }
 
   // Передадим текст ошибки вторым параметром
@@ -73,24 +73,9 @@ class FormValidator {
   }
 
   enableValidation = () => { /* создали функцию  */
-
-    const allForms = Array.from(document.querySelectorAll(this._formSelector)); /* создали переменную. внутри переменной разместили массив состоящий из фвсех форм на сайте  */
-    allForms.forEach(form => { /* обходим все формы  */
-      this._addEventListeners(form); /*вызываем фнукцию, которой передаем каждый элемент массива состоящий из форм  */
-    });
+    this._addEventListeners(this._formElement); /*вызываем фнукцию, которой передаем каждый элемент массива состоящий из форм  */
   }
 
 }
 
 
-const validationConfig = {
-  formSelector: '.form',
-  inputSelector: '.form__input',
-  submitButtonSelector: '.form__sumbit',
-  inactiveButtonClass: 'form__sumbit_inactive',
-  inputErrorClass: 'form__input_error_border',
-  errorClass: 'form__input_error_active'
-}
-
-const vi = new FormValidator(validationConfig, 'pop');
-vi.enableValidation();

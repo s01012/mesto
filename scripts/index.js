@@ -1,3 +1,6 @@
+import { FormValidator } from "./FormValidator.js";
+import {Card} from "./Card.js";
+
 const popupElement = document.querySelector('#editProfile');
 const popupElementCards = document.querySelector('#addCards');
 const popupImage = document.querySelector('#imageOpen');
@@ -73,28 +76,21 @@ const initialCards = [
     }
   ];
 
+
   for(let i = 0; i<initialCards.length; i++){
-    const card = createCard(initialCards[i].link, initialCards[i].name);
-    cardsList.append(card);
+    const cardCreator = new Card(initialCards[i].link, initialCards[i].name, '#card');
+    const cardElement = cardCreator.createCard();
+    cardsList.append(cardElement);
   }
 
-function createCard(link, name) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardElementImage = cardElement.querySelector('.elements__card-image');
-  cardElementImage.setAttribute('src', link);
-  cardElementImage.setAttribute('alt', name);
-  cardElement.querySelector('.elements__card-title').textContent = name;
-  cardElement.querySelector('.elements__button').addEventListener('click', activateLike);
-  cardElement.querySelector('.elements__delete').addEventListener('click', deleteCards);
-  cardElementImage.addEventListener('click', openImage);
-  return cardElement;
-}
-
 function addCards(evt) {
-  const card = createCard(inputLink.value, inputTitle.value);
-  cardsList.prepend(card);
+  evt.preventDefault();
+  const cardCreator = new Card(inputLink.value, inputTitle.value, '#card');
+  const cardElement = cardCreator.createCard();
+  cardsList.prepend(cardElement);
   evt.target.reset();
   closePopupCards();
+  console.log('Работает');
 }
 
 function openEditProfileForm() {
@@ -177,3 +173,20 @@ function overlayClick (evt) {
    closeOpenedPopup();
  }
 }
+
+
+const validationConfig = {
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__sumbit',
+  inactiveButtonClass: 'form__sumbit_inactive',
+  inputErrorClass: 'form__input_error_border',
+  errorClass: 'form__input_error_active'
+}
+const profileValidatior = new FormValidator(validationConfig, formElement);
+profileValidatior.enableValidation();
+
+const addingFormValidator = new FormValidator(validationConfig, formElementAddCards);
+addingFormValidator.enableValidation();
+
+export { popupImage, escapePressed, popupImgLink, popupCaption, overlayClick };
