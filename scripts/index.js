@@ -8,6 +8,8 @@ const personName = document.querySelector('.profile__title');
 const personDescription = document.querySelector('.profile__subtitle');
 const popupCaption = popupImage.querySelector('.popup__caption');
 
+popupImage.classList.add('popup_dark');
+
 /*найти, положить элемент кнопки редактирования профиля в переменную, доабвить к нему слушатели и вызвать функцию*/
 const elementPen = document.querySelector('.profile__button-editor');
 elementPen.addEventListener('click', openEditProfileForm);
@@ -43,10 +45,8 @@ popupImageExit.addEventListener('click', closePopupImage);
 const inputTitle = document.querySelector('#title');
 const inputLink = document.querySelector('#link');
 
-/* вытаскиваем содержимое шаблона и контейнер для карточек*/
-const templateContent = document.querySelector('#card').content;
+/* вытаскиваем контейнер для карточек*/
 const cardsList = document.querySelector('.elements__list');
-const cardTemplate = templateContent.querySelector('.elements__card');
 /*заполняем список карточками по умолчанию*/
 
 const initialCards = [
@@ -78,19 +78,21 @@ const initialCards = [
 
 
   for(let i = 0; i<initialCards.length; i++){
-    const cardCreator = new Card(initialCards[i].link, initialCards[i].name, '#card');
-    const cardElement = cardCreator.createCard();
+    const cardElement = createCard(initialCards[i].link, initialCards[i].name);
     cardsList.append(cardElement);
   }
 
 function addCards(evt) {
   evt.preventDefault();
-  const cardCreator = new Card(inputLink.value, inputTitle.value, '#card');
-  const cardElement = cardCreator.createCard();
+  const cardElement = createCard(inputLink.value, inputTitle.value);
   cardsList.prepend(cardElement);
   evt.target.reset();
   closePopupCards();
-  console.log('Работает');
+}
+
+function createCard (link, name) {
+  const cardCreator = new Card(link, name, '#card');
+  return cardCreator.createCard();
 }
 
 function openEditProfileForm() {
@@ -120,26 +122,6 @@ function submitEditProfileForm (evt) {
   personName.textContent = inputName.value;
   personDescription.textContent = inputJob.value;
   closeEditProfileForm();
-}
-
-/* коллбэк к лайкам */
-function activateLike(evt) {
-  evt.target.classList.toggle('elements__button_active');
-}
-
-function deleteCards(evt) {
-  evt.target.closest('.elements__card').remove();
-
-}
-
-function openImage (evt) {
-  const cardImage = evt.target.getAttribute('src');
-  const cardTitle = evt.target.closest('.elements__card').querySelector('.elements__card-title').textContent;
-  popupImgLink.setAttribute('src', cardImage);
-  popupImgLink.setAttribute('alt', cardTitle);
-  popupCaption.textContent = cardTitle;
-  addPopupOpened(popupImage);
-  popupImage.classList.add('popup_dark');
 }
 
 function removePopupOpened(popup) {
@@ -189,4 +171,4 @@ profileValidatior.enableValidation();
 const addingFormValidator = new FormValidator(validationConfig, formElementAddCards);
 addingFormValidator.enableValidation();
 
-export { popupImage, escapePressed, popupImgLink, popupCaption, overlayClick };
+export { popupImage, popupImgLink, popupCaption, addPopupOpened };

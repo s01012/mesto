@@ -1,4 +1,4 @@
-import { popupImage, escapePressed, popupImgLink, popupCaption, overlayClick } from "./index.js";
+import { popupImage, popupImgLink, popupCaption, addPopupOpened } from "./index.js";
 export class Card {
   constructor(link, name, template) {
     this._cardElement = document.querySelector(template).content.querySelector('.elements__card').cloneNode(true);
@@ -16,18 +16,11 @@ export class Card {
       .remove();
   }
 
-  _addPopupOpened(popup) {
-    popup.classList.add('popup_opened');
-    document.addEventListener('keydown', escapePressed);
-    document.addEventListener('click', overlayClick);
-  }
-
   _openImage() {
     popupImgLink.setAttribute('src', this._link);
     popupImgLink.setAttribute('alt', this._name);
     popupCaption.textContent = this._name;
-    this._addPopupOpened(popupImage);
-    // popupImage.classList.add('popup_dark');
+    addPopupOpened(popupImage);
   }
 
   _addEventListeners() {

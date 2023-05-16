@@ -36,14 +36,14 @@ export class FormValidator {
     }
   }
 
-  _hasInvalidInput = (allInputs) => {
-    return allInputs.some((inputElement) => {
+  _hasInvalidInput = () => {
+    return this._allInputs.some((inputElement) => {
       return !inputElement.validity.valid;
     })
   };
 
-  _toggleSubmitButton = (allInputs, submitButton) => {
-    if (this._hasInvalidInput(allInputs)) {
+  _toggleSubmitButton = (submitButton) => {
+    if (this._hasInvalidInput()) {
       submitButton.classList.add(this._inactiveButtonClass);
       submitButton.setAttribute('disabled', true);
     }
@@ -55,20 +55,20 @@ export class FormValidator {
 
 
   _addEventListeners = (someForm) => { /*вызываем фнукцию, которая получает в качестве параметра форму */
-    const allInputs = Array.from(someForm.querySelectorAll(this._inputSelector)); /*создали переменную, которая получает массив из всех полей ввода */
+    this._allInputs = Array.from(someForm.querySelectorAll(this._inputSelector)); /*создали переменную, которая получает массив из всех полей ввода */
 
     const submit = someForm.querySelector(this._submitButtonSelector);
-    this._toggleSubmitButton(allInputs, submit);
-    allInputs.forEach(element => { /*обходим все поля ввода */
+    this._toggleSubmitButton(submit);
+    this._allInputs.forEach(element => { /*обходим все поля ввода */
       element.addEventListener('input', () => {  /*на каждое поле ставим слушатель по вводлу клавиатуры */
       this._isValid(element); /*вызвали функцию, передали поле ввода */
 
-        this._toggleSubmitButton(allInputs, submit);
+        this._toggleSubmitButton(submit);
 
       })
     });
     someForm.addEventListener('submit', () => {
-      this._toggleSubmitButton(allInputs, submit);
+      this._toggleSubmitButton(submit);
     })
   }
 
