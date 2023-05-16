@@ -57,18 +57,18 @@ export class FormValidator {
   _addEventListeners = (someForm) => { /*вызываем фнукцию, которая получает в качестве параметра форму */
     this._allInputs = Array.from(someForm.querySelectorAll(this._inputSelector)); /*создали переменную, которая получает массив из всех полей ввода */
 
-    const submit = someForm.querySelector(this._submitButtonSelector);
-    this._toggleSubmitButton(submit);
+    this._submit = someForm.querySelector(this._submitButtonSelector);
+    this._toggleSubmitButton(this._submit);
     this._allInputs.forEach(element => { /*обходим все поля ввода */
       element.addEventListener('input', () => {  /*на каждое поле ставим слушатель по вводлу клавиатуры */
       this._isValid(element); /*вызвали функцию, передали поле ввода */
 
-        this._toggleSubmitButton(submit);
+        this._toggleSubmitButton(this._submit);
 
       })
     });
     someForm.addEventListener('submit', () => {
-      this._toggleSubmitButton(submit);
+      this._toggleSubmitButton(this._submit);
     })
   }
 
